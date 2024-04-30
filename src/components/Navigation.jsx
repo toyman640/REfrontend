@@ -4,11 +4,11 @@ const Navigation = () => {
 
   return (
     <div className="Navigation">
-      <h2 className="Logo">LOGO</h2>
+      <h2 className="Logo"> <span className="LogoSpace">LOGO</span></h2>
       <div className="MenuContents">
-        <form action="">
-          <input type="text" placeholder="Search Property" />
-          <button>Search</button>
+        <form action="" className="SearchForm">
+          <input className="SearchInput" type="text" placeholder="Search Property" />
+          <button className="SubmitButton">Search</button>
         </form>
         <ul className="MenuItems">
           <li>Home</li>
