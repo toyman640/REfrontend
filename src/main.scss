@@ -1,5 +1,70 @@
 $myColor: yellow;
+$flex: flex;
+$primaryColor: #4f7942;
 
+body {
+  margin: 0;
+}
+
+// Navigation
 .MainComponent {
   color: $myColor;
 }
+
+.Logo {
+  width: 30%;
+}
+
+.LogoSpace {
+  margin-left: 8%;
+}
+
+@media (min-width: 768px) {
+  .Navigation {
+    display: $flex;
+    background-color: #4f7942;
+    border: 0;
+    padding: 0;
+    margin: 0;
+  }
+
+  .MenuContents {
+    display: $flex;
+    width: 70%;
+    justify-content: space-around;
+  }
+
+  .MenuItems {
+    display: $flex;
+    list-style: none;
+    width: 30%;
+    justify-content: space-between;
+  }
+
+  .SearchForm {
+    margin-top: 2%;
+    width: 50%;
+  }
+
+  .SearchInput {
+    width: 80%;
+    height: 60%;
+    border-radius: 8px;
+    border: none;
+    padding-left: 2%;
+
+    &:focus {
+      /// box-shadow: 0 0 5px rgba(81, 203, 238, 1) !important;
+      border: 1px solid rgba(81, 203, 238, 1) !important;
+    }
+  }
+
+  .SubmitButton {
+    margin-left: 2%;
+    padding: 5px 12px;
+    border: none;
+    border-radius: 8px;
+    background-color: #fff;
+  }
+}
+// Navigation
