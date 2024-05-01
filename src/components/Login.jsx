@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import loginUser from '../redux/user'
+import { useNavigate } from "react-router-dom";
+import { loginUser } from "../redux/user/userSlice";
 
 const Login = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({ email: "", password: "" });
 
   const handleInputChange = (e) => {
@@ -14,7 +16,23 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(loginUser(formData));
+    const userData = {
+      user: {
+        email: formData.email,
+        password: formData.password
+      }
+    }
+    dispatch(loginUser(userData))
+      .then((action) => {
+        if (action.payload.status.code === 200) {
+          navigate('/dashboard-page');
+        } else {
+          navigate('/login-page')
+        }
+      })
+      .catch(() => {
+
+      });
   }
 
 
