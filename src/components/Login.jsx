@@ -24,14 +24,14 @@ const Login = () => {
     }
     dispatch(loginUser(userData))
       .then((action) => {
-        if (action.payload.status.code === 200) {
+        if (action.payload.user.status.code === 200) {
           navigate('/dashboard-page');
         } else {
           navigate('/login-page')
         }
       })
       .catch(() => {
-
+        console.log('fails');
       });
   }
 
