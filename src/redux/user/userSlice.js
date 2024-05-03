@@ -1,13 +1,15 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-// import CryptoJS from "crypto-js";
+import CryptoJS from "crypto-js";
 
 const LOGIN_URL = 'http://127.0.0.1:3000/login';
 const LOGOUT_URL = 'http://127.0.0.1:3000/logout';
 
-// const encryptData = (data) => {
-//   return CryptoJS.AES.encrypt(JSON.stringify(data), SECRET_KEY).toString();
-// };
+const SECRET_KEY = import.meta.env.VITE_SECRET_KEY;
+
+const encryptData = (data) => {
+  return CryptoJS.AES.encrypt(JSON.stringify(data), SECRET_KEY).toString();
+};
 
 // // Function to decrypt data using CryptoJS
 // const decryptData = (encryptedData) => {
@@ -102,7 +104,7 @@ const userSlice = createSlice({
 
         // Save data to localStorage
         localStorage.setItem('user', JSON.stringify(state.user));
-        localStorage.setItem('authToken', JSON.stringify(state.authToken));
+        localStorage.setItem('authToken', encryptData(state.authToken));
 
         return state;
         
