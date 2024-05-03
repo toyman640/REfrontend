@@ -13,7 +13,7 @@ const Login = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-
+  // localStorage.clear();
   const handleSubmit = (e) => {
     e.preventDefault();
     const userData = {

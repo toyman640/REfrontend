@@ -16,24 +16,25 @@ const LOGOUT_URL = 'http://127.0.0.1:3000/logout';
 // };
 
 
-// const getInitialState = () => {
-//   const storedUser = localStorage.getItem('user');
-//   const storedAuthToken = localStorage.getItem('authToken');
+const getInitialState = () => {
+  const storedUser = localStorage.getItem('user');
+  const storedAuthToken = localStorage.getItem('authToken');
 
-//   return {
-//     user: storedUser ? JSON.parse(storedUser) : null,
-//     status: 'idle',
-//     error: null,
-//     authToken: storedAuthToken ? storedAuthToken : null,
-//   };
-// };
+  return {
+    user: storedUser ? JSON.parse(storedUser) : null,
+    status: 'idle',
+    error: null,
+    authToken: storedAuthToken ? storedAuthToken : null,
+  };
+};
 
-// const initialState = getInitialState();
+const initialState = getInitialState();
 
-const initialState = {
-  user: null,
+// const initialState = {
+//   user: null,
+//   authToken: null,
 
-}
+// }
 
 export const loginUser = createAsyncThunk(
   'user/loginUser',
@@ -100,10 +101,10 @@ const userSlice = createSlice({
         // localStorage.clear();
 
         // Save data to localStorage
-        // localStorage.setItem('user', JSON.stringify(state.user));
+        localStorage.setItem('user', JSON.stringify(state.user));
         // localStorage.setItem('authToken', encryptData(state.authToken));
 
-        // return state;
+        return state;
         
       })
       .addCase(loginUser.rejected, (state, action) => ({
