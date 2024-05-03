@@ -102,7 +102,7 @@ const userSlice = createSlice({
 
         // Save data to localStorage
         localStorage.setItem('user', JSON.stringify(state.user));
-        // localStorage.setItem('authToken', encryptData(state.authToken));
+        localStorage.setItem('authToken', JSON.stringify(state.authToken));
 
         return state;
         
