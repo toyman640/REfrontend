@@ -1,11 +1,13 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logOutUser } from "../redux/user/userSlice";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const loggedUser = useSelector((state) => state.user.user);
+  console.log(logOutUser.id);
 
   const handleLogout = () => {
     dispatch(logOutUser()) // Dispatch the logout action
@@ -20,6 +22,7 @@ const Dashboard = () => {
   return (
     <div>
       <h2>Dashboard Page</h2>
+        <p>Hello {loggedUser.email}</p>
       <button onClick={handleLogout}>Logout</button> {/* Logout button */}
     </div>
   );
