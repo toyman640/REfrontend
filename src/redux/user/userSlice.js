@@ -47,10 +47,10 @@ export const loginUser = createAsyncThunk(
         headers,
       });
 
-      // const authToken = response.headers['authorization'];
+      const authToken = response.headers['authorization'];
       console.log(response);
-      // return { user: response.data, authToken };
-      return response.data;
+      return { user: response.data, authToken };
+      // /return response.data;
     } catch (error) {
       throw error;
     }
@@ -93,10 +93,11 @@ const userSlice = createSlice({
       }))
       .addCase(loginUser.fulfilled, (state, action) => {
         console.log('Action:', action);
-        state.user = action.payload.data;
-        // state.authToken = action.payload.authToken;
+        state.user = action.payload.user.data;
+        state.authToken = action.payload.authToken;
         state.status = 'idle';
         state.error = null;
+        // localStorage.clear();
 
         // Save data to localStorage
         // localStorage.setItem('user', JSON.stringify(state.user));
