@@ -7,15 +7,15 @@ const Dashboard = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const loggedUser = useSelector((state) => state.user.user);
-  console.log(logOutUser.id);
 
   const handleLogout = () => {
     dispatch(logOutUser()) // Dispatch the logout action
       .then(() => {
-        navigate('/login-page'); // Navigate to the login page after successful logout
+        navigate('/login-page');
       })
       .catch((error) => {
-        console.log('Logout error:', error); // Handle any logout errors
+        console.log('Logout error:', error);
+        console.log('error happend')
       });
   };
 

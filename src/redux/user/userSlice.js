@@ -7,15 +7,16 @@ const LOGOUT_URL = 'http://127.0.0.1:3000/logout';
 
 const SECRET_KEY = import.meta.env.VITE_SECRET_KEY;
 
+// // Function to encrypt token 
 const encryptData = (data) => {
   return CryptoJS.AES.encrypt(JSON.stringify(data), SECRET_KEY).toString();
 };
 
-// // Function to decrypt data using CryptoJS
-// const decryptData = (encryptedData) => {
-//   const bytes = CryptoJS.AES.decrypt(encryptedData, SECRET_KEY);
-//   return JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
-// };
+// // Function to decrypt token
+const decryptData = (encryptedData) => {
+  const bytes = CryptoJS.AES.decrypt(encryptedData, SECRET_KEY);
+  return JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+};
 
 
 const getInitialState = () => {
@@ -26,9 +27,11 @@ const getInitialState = () => {
     user: storedUser ? JSON.parse(storedUser) : null,
     status: 'idle',
     error: null,
-    authToken: storedAuthToken ? storedAuthToken : null,
+    authToken: storedAuthToken ? decryptData(storedAuthToken) : null,
   };
 };
+
+// console.log(authToken);
 
 const initialState = getInitialState();
 
@@ -51,7 +54,6 @@ export const loginUser = createAsyncThunk(
       });
 
       const authToken = response.headers['authorization'];
-      console.log(response);
       return { user: response.data, authToken };
       // /return response.data;
     } catch (error) {
@@ -60,28 +62,73 @@ export const loginUser = createAsyncThunk(
   }
 );
 
+
 export const logOutUser = createAsyncThunk(
   'user/logOutUser',
-  async (authToken) => { // Accept authToken as an argument
+  async (_, { getState }) => { // Accept authToken as an argument
     try {
-      // const headers = {
-      //   "Authorization": authToken, // Include authToken in headers
-      // };
+      // console.log(authToken);
+      const state = getState(); // Get the current state
+      const authToken = state.user.authToken || initialState.authToken;
 
-      const response = await axios.delete(LOGOUT_URL, {headers: { "Authorization":  authToken }});
+      if (!authToken) {
+        // Handle the case where authToken is not available
+        throw new Error('Auth token not found.');
+      }
+      const headers = {
+        "Authorization": authToken, // Include authToken in headers
+      };
+
+      const response = await axios.delete(LOGOUT_URL, { headers });
 
       if (response.status === 200) {
         // Clear local storage if logout is successful
         localStorage.removeItem('user');
         localStorage.removeItem('authToken');
+        console.log('pass');
       }
 
       return response.data;
     } catch (error) {
+      console.log('fails', error);
       throw error;
     }
   }
 );
+
+// export const logOutUser = createAsyncThunk(
+//   'user/logOutUser',
+//   async (_, { getState }) => { // Use getState to access the Redux state
+//     try {
+//       const state = getState(); // Get the current state
+//       const authToken = state.user.authToken; // Get the authToken from the state
+
+//       if (!authToken) {
+//         // Handle the case where authToken is not available
+//         throw new Error('Auth token not found.');
+//       }
+
+//       const decryptedAuthToken = decryptData(authToken); // Decrypt the authToken
+
+//       const headers = {
+//         "Authorization": decryptedAuthToken, // Use decryptedAuthToken as the Authorization header
+//       };
+
+//       const response = await axios.delete(LOGOUT_URL, { headers });
+
+//       if (response.status === 200) {
+//         // Clear local storage if logout is successful
+//         localStorage.removeItem('user');
+//         localStorage.removeItem('authToken');
+//       }
+
+//       return response.data;
+//     } catch (error) {
+//       throw error;
+//     }
+//   }
+// );
+
 
 const userSlice = createSlice({
   name: 'user',
@@ -95,7 +142,6 @@ const userSlice = createSlice({
         error: null,
       }))
       .addCase(loginUser.fulfilled, (state, action) => {
-        console.log('Action:', action);
         state.user = action.payload.user.data;
         state.authToken = action.payload.authToken;
         state.status = 'idle';
