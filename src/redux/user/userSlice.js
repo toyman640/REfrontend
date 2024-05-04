@@ -1,23 +1,20 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
-import CryptoJS from "crypto-js";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
+import CryptoJS from 'crypto-js';
 
 const LOGIN_URL = 'http://127.0.0.1:3000/login';
 const LOGOUT_URL = 'http://127.0.0.1:3000/logout';
 
 const SECRET_KEY = import.meta.env.VITE_SECRET_KEY;
 
-// // Function to encrypt token 
-const encryptData = (data) => {
-  return CryptoJS.AES.encrypt(JSON.stringify(data), SECRET_KEY).toString();
-};
+// // Function to encrypt token
+const encryptData = (data) => CryptoJS.AES.encrypt(JSON.stringify(data), SECRET_KEY).toString();
 
 // // Function to decrypt token
 const decryptData = (encryptedData) => {
   const bytes = CryptoJS.AES.decrypt(encryptedData, SECRET_KEY);
   return JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
 };
-
 
 const getInitialState = () => {
   const storedUser = localStorage.getItem('user');
@@ -41,77 +38,41 @@ const initialState = getInitialState();
 
 // }
 
-export const loginUser = createAsyncThunk(
-  'user/loginUser',
-  async (userData) => {
-    try {
-      const headers = {
-        "Content-Type": "application/json",
-      };
+// export const loginUser = createAsyncThunk(
+//   'user/loginUser',
+//   async (userData) => {
+//     try {
+//       const headers = {
+//         'Content-Type': 'application/json',
+//       };
 
-      const response = await axios.post(LOGIN_URL, userData, {
-        headers,
-      });
+//       const response = await axios.post(LOGIN_URL, userData, {
+//         headers,
+//       });
 
-      const authToken = response.headers['authorization'];
-      return { user: response.data, authToken };
-      // /return response.data;
-    } catch (error) {
-      throw error;
-    }
-  }
-);
-
-
-export const logOutUser = createAsyncThunk(
-  'user/logOutUser',
-  async (_, { getState }) => { // Accept authToken as an argument
-    try {
-      // console.log(authToken);
-      const state = getState(); // Get the current state
-      const authToken = state.user.authToken || initialState.authToken;
-
-      if (!authToken) {
-        // Handle the case where authToken is not available
-        throw new Error('Auth token not found.');
-      }
-      const headers = {
-        "Authorization": authToken, // Include authToken in headers
-      };
-
-      const response = await axios.delete(LOGOUT_URL, { headers });
-
-      if (response.status === 200) {
-        // Clear local storage if logout is successful
-        localStorage.removeItem('user');
-        localStorage.removeItem('authToken');
-        console.log('pass');
-      }
-
-      return response.data;
-    } catch (error) {
-      console.log('fails', error);
-      throw error;
-    }
-  }
-);
+//       const authToken = response.headers.authorization;
+//       return { user: response.data, authToken };
+//       // /return response.data;
+//     } catch (error) {
+//       throw error;
+//     }
+//   },
+// );
 
 // export const logOutUser = createAsyncThunk(
 //   'user/logOutUser',
-//   async (_, { getState }) => { // Use getState to access the Redux state
+//   async (_, { getState }) => { // Accept authToken as an argument
 //     try {
+//       // console.log(authToken);
 //       const state = getState(); // Get the current state
-//       const authToken = state.user.authToken; // Get the authToken from the state
+//       const authToken = state.user.authToken || initialState.authToken;
 
 //       if (!authToken) {
 //         // Handle the case where authToken is not available
 //         throw new Error('Auth token not found.');
 //       }
-
-//       const decryptedAuthToken = decryptData(authToken); // Decrypt the authToken
-
 //       const headers = {
-//         "Authorization": decryptedAuthToken, // Use decryptedAuthToken as the Authorization header
+//         Authorization: authToken, // Include authToken in headers
 //       };
 
 //       const response = await axios.delete(LOGOUT_URL, { headers });
@@ -126,9 +87,50 @@ export const logOutUser = createAsyncThunk(
 //     } catch (error) {
 //       throw error;
 //     }
-//   }
+//   },
 // );
 
+export const loginUser = createAsyncThunk(
+  'user/loginUser',
+  async (userData) => {
+    const headers = {
+      'Content-Type': 'application/json',
+    };
+
+    const response = await axios.post(LOGIN_URL, userData, {
+      headers,
+    });
+
+    const authToken = response.headers.authorization;
+    return { user: response.data, authToken };
+  },
+);
+
+export const logOutUser = createAsyncThunk(
+  'user/logOutUser',
+  async (_, { getState }) => { // Accept authToken as an argument
+    const state = getState(); // Get the current state
+    const authToken = state.user.authToken || initialState.authToken;
+
+    if (!authToken) {
+      // Handle the case where authToken is not available
+      throw new Error('Auth token not found.');
+    }
+    const headers = {
+      Authorization: authToken, // Include authToken in headers
+    };
+
+    const response = await axios.delete(LOGOUT_URL, { headers });
+
+    if (response.status === 200) {
+      // Clear local storage if logout is successful
+      localStorage.removeItem('user');
+      localStorage.removeItem('authToken');
+    }
+
+    return response.data;
+  },
+);
 
 const userSlice = createSlice({
   name: 'user',
@@ -153,7 +155,6 @@ const userSlice = createSlice({
         localStorage.setItem('authToken', encryptData(state.authToken));
 
         return state;
-        
       })
       .addCase(loginUser.rejected, (state, action) => ({
         ...state,
@@ -164,4 +165,3 @@ const userSlice = createSlice({
 });
 
 export default userSlice.reducer;
-

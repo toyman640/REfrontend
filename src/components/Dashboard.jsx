@@ -1,7 +1,7 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { logOutUser } from "../redux/user/userSlice";
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { logOutUser } from '../redux/user/userSlice';
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -13,17 +13,20 @@ const Dashboard = () => {
       .then(() => {
         navigate('/login-page');
       })
-      .catch((error) => {
-        console.log('Logout error:', error);
-        console.log('error happend')
+      .catch(() => {
       });
   };
 
   return (
     <div>
       <h2>Dashboard Page</h2>
-        <p>Hello {loggedUser.email}</p>
-      <button onClick={handleLogout}>Logout</button> {/* Logout button */}
+      <p>
+        Hello
+        {loggedUser.email}
+      </p>
+      <button type="button" onClick={handleLogout}>Logout</button>
+      {' '}
+      {/* Logout button */}
     </div>
   );
 };
