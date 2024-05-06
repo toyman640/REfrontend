@@ -1,18 +1,24 @@
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPropertyTypes } from "../redux/Categories/propTypeSlice";
+import { getOwnerTypes } from "../redux/Categories/ownershipTypeSlice";
 
 const PropertyForm = () => {
   const dispatch = useDispatch();
   const imagesRef = useRef([]);
-  const getPropTypes = useSelector((state) => state.propertyTypes.propertyTypes.length > 0);
+  const getPropTypesLoaded = useSelector((state) => state.propertyTypes.propertyTypes.length > 0);
+  const getOwnerTypesLoaded = useSelector((state) => state.ownerTypes.ownerTypes.length > 0);
 
   useEffect(() => {
-    if (!getPropTypes) {
+    if (!getPropTypesLoaded) {
       dispatch(getPropertyTypes());
     }
-  }, [dispatch, getPropTypes]);
+    if (!getOwnerTypesLoaded) {
+      dispatch(getOwnerTypes());
+    }
+  }, [dispatch, getPropTypesLoaded, getOwnerTypesLoaded]);
   const propTypeOptions = useSelector((state) => state.propertyTypes.propertyTypes);
+  const ownerTypeOptions = useSelector((state) => state.ownerTypes.ownerTypes);
 
   return (
     <div>
@@ -47,18 +53,23 @@ const PropertyForm = () => {
             <select name="property_type" id="">
               <option value="">Select Property Type</option>
               {propTypeOptions.map((type) => (
-              <option key={type.id} value={type.id}>
-                {type.name}
-              </option>
-            ))}
+                <option key={type.id} value={type.id}>
+                  {type.name}
+                </option>
+              ))}
             </select>
           </label>
         </div>
         <div>
           <label htmlFor="property_type">
-            Ownership Type Type:
+            Owner Type:
             <select name="ownership_type" id="">
-              <option value=""></option>
+              <option value="">Select Ownership Type</option>
+              {ownerTypeOptions.map((owner) => (
+                <option key={owner.id} value={owner.id}>
+                  {owner.name}
+                </option>
+              ))}
             </select>
           </label>
         </div>

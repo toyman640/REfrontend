@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const GET_OWNER_TYPE_URL = "http://127.0.0.1:3000/property_types"
+const GET_OWNER_TYPE_URL = "http://127.0.0.1:3000/ownership_types"
 
 const initialState = {
   ownerTypes: [],
@@ -31,7 +31,7 @@ const ownerTypeSlice = createSlice({
       }))
       .addCase(getOwnerTypes.fulfilled, (state, action) => ({
         ...state,
-        propertyTypes: action.payload,
+        ownerTypes: action.payload,
         loading: false,
         error: null,
 
