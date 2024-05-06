@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { logOutUser } from '../redux/user/userSlice';
 
 const Dashboard = () => {
@@ -25,8 +25,8 @@ const Dashboard = () => {
         {loggedUser.email}
       </p>
       <button type="button" onClick={handleLogout}>Logout</button>
-      {' '}
-      {/* Logout button */}
+     
+      <Link to="/create-new-property">Post new Property</Link>
     </div>
   );
 };
