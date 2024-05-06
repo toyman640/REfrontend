@@ -45,6 +45,7 @@ export const createProperty = createAsyncThunk(
 const propertySlice = createSlice({
   name: "properties",
   initialState,
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(getProperties.pending, (state) => ({
@@ -55,6 +56,7 @@ const propertySlice = createSlice({
       .addCase(getProperties.fulfilled, (state, action) => ({
         ...state,
         properties: action.payload,
+        loading: false,
         error: null,
 
       }))
