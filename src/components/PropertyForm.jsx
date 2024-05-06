@@ -1,7 +1,19 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getPropertyTypes } from "../redux/Categories/propTypeSlice";
 
 const PropertyForm = () => {
+  const dispatch = useDispatch();
   const imagesRef = useRef([]);
+  const getPropTypes = useSelector((state) => state.propertyTypes.propertyTypes.length > 0);
+
+  useEffect(() => {
+    if (!getPropTypes) {
+      dispatch(getPropertyTypes());
+    }
+  }, [dispatch, getPropTypes]);
+  const propTypeOptions = useSelector((state) => state.propertyTypes.propertyTypes);
+
   return (
     <div>
       <form action="">
@@ -33,7 +45,12 @@ const PropertyForm = () => {
           <label htmlFor="property_type">
             Property Type:
             <select name="property_type" id="">
-              <option value=""></option>
+              <option value="">Select Property Type</option>
+              {propTypeOptions.map((type) => (
+              <option key={type.id} value={type.id}>
+                {type.name}
+              </option>
+            ))}
             </select>
           </label>
         </div>

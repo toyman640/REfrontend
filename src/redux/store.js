@@ -9,6 +9,7 @@ export const store = configureStore({
     user: userReducer,
     properties: propertyReducer,
     propertyTypes: propetyTypesReducer,
+    ownerTypes: ownerTypeReducer,
   },
 });
 
