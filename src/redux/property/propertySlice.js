@@ -40,3 +40,30 @@ export const createProperty = createAsyncThunk(
     }
   }
 )
+
+
+const propertySlice = createSlice({
+  name: "properties",
+  initialState,
+  extraReducers: (builder) => {
+    builder
+      .addCase(getProperties.pending, (state) => ({
+        ...state,
+        loading: true,
+        error: null,
+      }))
+      .addCase(getProperties.fulfilled, (state, action) => ({
+        ...state,
+        properties: action.payload,
+        error: null,
+
+      }))
+      .addCase(getProperties.rejected, (state, action) => ({
+        ...state,
+        loading: false,
+        error: action.error.message,
+      }))
+  }
+})
+
+export default propertySlice.reducer;
