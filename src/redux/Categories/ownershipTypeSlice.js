@@ -10,12 +10,8 @@ const initialState = {
 };
 
 export const getOwnerTypes = createAsyncThunk('ownershipTypes/getOwnershipTypes', async () => {
-  try {
-    const response = await axios.get(GET_OWNER_TYPE_URL);
-    return response.data;
-  } catch (err) {
-    throw err;
-  }
+  const response = await axios.get(GET_OWNER_TYPE_URL);
+  return response.data;
 });
 
 const ownerTypeSlice = createSlice({

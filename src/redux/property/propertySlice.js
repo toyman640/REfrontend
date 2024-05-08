@@ -22,21 +22,17 @@ export const getProperties = createAsyncThunk(
 export const createProperty = createAsyncThunk(
   'properties/createProperty',
   async (formDataToSend, thunkAPI) => {
-    try {
-      const headers = {
-        'Content-Type': 'multipart/form-data',
-        // "X-CSRF-Token": csrfToken,
-      };
-      await axios.post(GET_PROPERTIES_URL, formDataToSend, {
-        headers,
-      });
+    const headers = {
+      'Content-Type': 'multipart/form-data',
+      // "X-CSRF-Token": csrfToken,
+    };
+    await axios.post(GET_PROPERTIES_URL, formDataToSend, {
+      headers,
+    });
 
-      const response = await axios.get(GET_PROPERTIES_URL);
-      thunkAPI.dispatch(getProperties());
-      return response.data;
-    } catch (error) {
-      throw error;
-    }
+    const response = await axios.get(GET_PROPERTIES_URL);
+    thunkAPI.dispatch(getProperties());
+    return response.data;
   },
 );
 

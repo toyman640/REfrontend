@@ -10,12 +10,8 @@ const initialState = {
 };
 
 export const getPropertyTypes = createAsyncThunk('propertyTypes/getPropertyTypes', async () => {
-  try {
-    const response = await axios.get(GET_PROPERTY_TYPE_URL);
-    return response.data;
-  } catch (err) {
-    throw err;
-  }
+  const response = await axios.get(GET_PROPERTY_TYPE_URL);
+  return response.data;
 });
 
 const propetyTypesSlice = createSlice({

@@ -143,8 +143,10 @@ const PropertyForm = () => {
           </label>
         </div>
         <div>
-          <label htmlFor="description">Description:</label>
-          <textarea name="description" onChange={handleChange} cols="30" rows="10" />
+          <label htmlFor="description">
+            Description:
+            <textarea name="description" onChange={handleChange} cols="30" rows="10" />
+            </label>
         </div>
         <input type="submit" value="Create Property" />
       </form>
