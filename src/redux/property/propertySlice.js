@@ -21,13 +21,14 @@ export const getProperties = createAsyncThunk(
 
 export const createProperty = createAsyncThunk(
   "properties/createProperty",
-  async(newProperty, thunkAPI) => {
+  async(formDataToSend, thunkAPI) => {
     try {
+      console.log("FormData to send:", formDataToSend);
       const headers = {
-        "Content-Type": "application/json",
+        "Content-Type": "multipart/form-data",
         // "X-CSRF-Token": csrfToken,
       };
-      await axios.post(GET_PROPERTIES_URL, newProperty, {
+      await axios.post(GET_PROPERTIES_URL, formDataToSend, {
         headers,
       })
 

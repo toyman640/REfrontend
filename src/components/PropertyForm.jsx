@@ -1,13 +1,50 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPropertyTypes } from "../redux/Categories/propTypeSlice";
 import { getOwnerTypes } from "../redux/Categories/ownershipTypeSlice";
+import { createProperty } from "../redux/property/propertySlice";
 
 const PropertyForm = () => {
   const dispatch = useDispatch();
-  const imagesRef = useRef([]);
+  // const imagesRef = useRef([]);
   const getPropTypesLoaded = useSelector((state) => state.propertyTypes.propertyTypes.length > 0);
   const getOwnerTypesLoaded = useSelector((state) => state.ownerTypes.ownerTypes.length > 0);
+  const [formData, setFormData] = useState({
+    title: "",
+    price: "",
+    no_of_rooms: "",
+    no_of_bathrooms: "",
+    property_type: "",
+    ownership_type: "",
+    address: "",
+    images: [],
+    description: ""
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  // const handleImageChange = (e) => {
+  //   console.log("Selected files:", e.target.files);
+  //   setFormData((prevData) => ({
+  //     ...prevData,
+  //     images: e.target.files,
+  //   }));
+  // };
+
+  const handleImageChange = (e) => {
+    const files = Array.prototype.slice.call(e.target.files);
+    console.log("Selected files:", files);
+    setFormData((prevData) => ({
+      ...prevData,
+      images: files,
+    }));
+  };
 
   useEffect(() => {
     if (!getPropTypesLoaded) {
@@ -17,40 +54,70 @@ const PropertyForm = () => {
       dispatch(getOwnerTypes());
     }
   }, [dispatch, getPropTypesLoaded, getOwnerTypesLoaded]);
+
   const propTypeOptions = useSelector((state) => state.propertyTypes.propertyTypes);
   const ownerTypeOptions = useSelector((state) => state.ownerTypes.ownerTypes);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formDataToSend = new FormData();
+    formDataToSend.append("property[title]", formData.title);
+    formDataToSend.append("property[price]", formData.price);
+    formDataToSend.append("property[description]", formData.description);
+    formDataToSend.append("property[no_of_rooms]", formData.no_of_rooms);
+    formDataToSend.append("property[no_of_bathrooms]", formData.no_of_bathrooms);
+    formDataToSend.append("property[property_type_id]", formData.property_type);
+    formDataToSend.append("property[ownership_type_id]", formData.ownership_type);
+    formDataToSend.append("property[address]", formData.address);
+    for (let i = 0; i < formData.images.length; i++) {
+      formDataToSend.append("property[images][]", formData.images[i]);
+    }
+    console.log("FormData to send (after appending data):", formDataToSend);
+    dispatch(createProperty(formDataToSend));
+    setFormData({
+      title: "",
+      price: "",
+      no_of_rooms: "",
+      no_of_bathrooms: "",
+      property_type: "",
+      ownership_type: "",
+      address: "",
+      images: [],
+      description: ""
+    });
+  };
+
   return (
     <div>
-      <form action="">
+      <form action="" onSubmit={handleSubmit} encType="multipart/form-data">
         <div>
           <label htmlFor="title">
             Title:
-            <input type="text" placeholder="3 bed room flat" required />
+            <input type="text" name="title" placeholder="3 bed room flat" onChange={handleChange} required />
           </label>
         </div>
         <div>
           <label htmlFor="price">
             Price:
-            <input type="number" name="price" id="price" />
+            <input type="number" name="price" onChange={handleChange} id="price" required />
           </label>
         </div>
         <div>
           <label htmlFor="rooms">
             Rooms:
-            <input type="number" name="rooms" id="rooms" />
+            <input type="number" name="no_of_rooms" onChange={handleChange} id="rooms" />
           </label>
         </div>
         <div>
           <label htmlFor="bathrooms">
             Bahtrooms:
-            <input type="number" name="bathrooms" id="rooms" />
+            <input type="number" name="no_of_bathrooms" onChange={handleChange} id="rooms" />
           </label>
         </div>
         <div>
           <label htmlFor="property_type">
             Property Type:
-            <select name="property_type" id="">
+            <select name="property_type" id="" onChange={handleChange}>
               <option value="">Select Property Type</option>
               {propTypeOptions.map((type) => (
                 <option key={type.id} value={type.id}>
@@ -61,9 +128,9 @@ const PropertyForm = () => {
           </label>
         </div>
         <div>
-          <label htmlFor="property_type">
+          <label htmlFor="ownership_type">
             Owner Type:
-            <select name="ownership_type" id="">
+            <select name="ownership_type" id="" onChange={handleChange}>
               <option value="">Select Ownership Type</option>
               {ownerTypeOptions.map((owner) => (
                 <option key={owner.id} value={owner.id}>
@@ -75,14 +142,19 @@ const PropertyForm = () => {
         </div>
         <div>
           <label htmlFor="address">
-            <textarea name="" id="" cols="30" rows="10"></textarea>
+            Address:
+            <input type="text" name="address" onChange={handleChange} required />
           </label>
         </div>
         <div>
-          <label htmlFor="image">
-            Images
-            <input type="file" name="image" id="image" multiple ref={imagesRef} />
+          <label htmlFor="images">
+            Images:
+            <input type="file" name="images" id="images" multiple onChange={handleImageChange} accept="image/jpeg,image/png,image/gif" />
           </label>
+        </div>
+        <div>
+          <label htmlFor="">Description:</label>
+          <textarea name="description" onChange={handleChange} cols="30" rows="10"></textarea>
         </div>
         <input type="submit" value="Create Property" />
       </form>
