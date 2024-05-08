@@ -1,23 +1,22 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const GET_OWNER_TYPE_URL = "http://127.0.0.1:3000/ownership_types"
+const GET_OWNER_TYPE_URL = 'http://127.0.0.1:3000/ownership_types';
 
 const initialState = {
   ownerTypes: [],
   status: 'idle',
   error: null,
-}
+};
 
 export const getOwnerTypes = createAsyncThunk('ownershipTypes/getOwnershipTypes', async () => {
   try {
     const response = await axios.get(GET_OWNER_TYPE_URL);
     return response.data;
   } catch (err) {
-    throw err
+    throw err;
   }
 });
-
 
 const ownerTypeSlice = createSlice({
   name: 'ownerTypes',
@@ -40,9 +39,9 @@ const ownerTypeSlice = createSlice({
         ...state,
         loading: false,
         error: action.error.message,
-      }))
-  }
+      }));
+  },
 
-})
+});
 
 export default ownerTypeSlice.reducer;

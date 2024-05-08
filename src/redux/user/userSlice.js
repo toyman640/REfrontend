@@ -109,7 +109,7 @@ export const loginUser = createAsyncThunk(
 
 export const getCurrentUser = createAsyncThunk(
   'user/getCurrentUser',
-  async (_, { getState}) => {
+  async (_, { getState }) => {
     const state = getState();
     const authToken = state.user.authToken || initialState.authToken;
 
@@ -117,14 +117,14 @@ export const getCurrentUser = createAsyncThunk(
       // Handle the case where authToken is not available
       throw new Error('Auth token not found.');
     }
-    const headers = {
-      Authorization: authToken, // Include authToken in headers
-    }
+    // const headers = {
+    //   Authorization: authToken, // Include authToken in headers
+    // };
 
     const response = await axios.get(GET_CURRENT_USER_URL);
     return response.data;
-  }
-)
+  },
+);
 
 export const logOutUser = createAsyncThunk(
   'user/logOutUser',

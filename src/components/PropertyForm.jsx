@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getPropertyTypes } from "../redux/Categories/propTypeSlice";
-import { getOwnerTypes } from "../redux/Categories/ownershipTypeSlice";
-import { createProperty } from "../redux/property/propertySlice";
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getPropertyTypes } from '../redux/Categories/propTypeSlice';
+import { getOwnerTypes } from '../redux/Categories/ownershipTypeSlice';
+import { createProperty } from '../redux/property/propertySlice';
 
 const PropertyForm = () => {
   const dispatch = useDispatch();
@@ -10,15 +10,15 @@ const PropertyForm = () => {
   const getPropTypesLoaded = useSelector((state) => state.propertyTypes.propertyTypes.length > 0);
   const getOwnerTypesLoaded = useSelector((state) => state.ownerTypes.ownerTypes.length > 0);
   const [formData, setFormData] = useState({
-    title: "",
-    price: "",
-    no_of_rooms: "",
-    no_of_bathrooms: "",
-    property_type: "",
-    ownership_type: "",
-    address: "",
+    title: '',
+    price: '',
+    no_of_rooms: '',
+    no_of_bathrooms: '',
+    property_type: '',
+    ownership_type: '',
+    address: '',
     images: [],
-    description: ""
+    description: '',
   });
 
   const handleChange = (e) => {
@@ -29,17 +29,8 @@ const PropertyForm = () => {
     }));
   };
 
-  // const handleImageChange = (e) => {
-  //   console.log("Selected files:", e.target.files);
-  //   setFormData((prevData) => ({
-  //     ...prevData,
-  //     images: e.target.files,
-  //   }));
-  // };
-
   const handleImageChange = (e) => {
     const files = Array.prototype.slice.call(e.target.files);
-    console.log("Selected files:", files);
     setFormData((prevData) => ({
       ...prevData,
       images: files,
@@ -61,29 +52,28 @@ const PropertyForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const formDataToSend = new FormData();
-    formDataToSend.append("property[title]", formData.title);
-    formDataToSend.append("property[price]", formData.price);
-    formDataToSend.append("property[description]", formData.description);
-    formDataToSend.append("property[no_of_rooms]", formData.no_of_rooms);
-    formDataToSend.append("property[no_of_bathrooms]", formData.no_of_bathrooms);
-    formDataToSend.append("property[property_type_id]", formData.property_type);
-    formDataToSend.append("property[ownership_type_id]", formData.ownership_type);
-    formDataToSend.append("property[address]", formData.address);
-    for (let i = 0; i < formData.images.length; i++) {
-      formDataToSend.append("property[images][]", formData.images[i]);
+    formDataToSend.append('property[title]', formData.title);
+    formDataToSend.append('property[price]', formData.price);
+    formDataToSend.append('property[description]', formData.description);
+    formDataToSend.append('property[no_of_rooms]', formData.no_of_rooms);
+    formDataToSend.append('property[no_of_bathrooms]', formData.no_of_bathrooms);
+    formDataToSend.append('property[property_type_id]', formData.property_type);
+    formDataToSend.append('property[ownership_type_id]', formData.ownership_type);
+    formDataToSend.append('property[address]', formData.address);
+    for (let i = 0; i < formData.images.length; i += 1) {
+      formDataToSend.append('property[images][]', formData.images[i]);
     }
-    console.log("FormData to send (after appending data):", formDataToSend);
     dispatch(createProperty(formDataToSend));
     setFormData({
-      title: "",
-      price: "",
-      no_of_rooms: "",
-      no_of_bathrooms: "",
-      property_type: "",
-      ownership_type: "",
-      address: "",
+      title: '',
+      price: '',
+      no_of_rooms: '',
+      no_of_bathrooms: '',
+      property_type: '',
+      ownership_type: '',
+      address: '',
       images: [],
-      description: ""
+      description: '',
     });
   };
 
@@ -153,8 +143,8 @@ const PropertyForm = () => {
           </label>
         </div>
         <div>
-          <label htmlFor="">Description:</label>
-          <textarea name="description" onChange={handleChange} cols="30" rows="10"></textarea>
+          <label htmlFor="description">Description:</label>
+          <textarea name="description" onChange={handleChange} cols="30" rows="10" />
         </div>
         <input type="submit" value="Create Property" />
       </form>

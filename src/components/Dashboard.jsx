@@ -25,7 +25,7 @@ const Dashboard = () => {
         {loggedUser.email}
       </p>
       <button type="button" onClick={handleLogout}>Logout</button>
-     
+
       <Link to="/create-new-property">Post new Property</Link>
     </div>
   );
