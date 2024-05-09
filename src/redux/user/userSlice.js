@@ -187,7 +187,7 @@ const userSlice = createSlice({
         currentUser: action.payload,
         loading: false,
         error: null,
-      }))
+      }));
   },
 });
 
