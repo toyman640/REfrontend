@@ -3,12 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getPropertyTypes } from '../redux/Categories/propTypeSlice';
 import { getOwnerTypes } from '../redux/Categories/ownershipTypeSlice';
 import { createProperty } from '../redux/property/propertySlice';
+import { getCurrentUser } from '../redux/user/userSlice';
 
 const PropertyForm = () => {
   const dispatch = useDispatch();
   // const imagesRef = useRef([]);
   const getPropTypesLoaded = useSelector((state) => state.propertyTypes.propertyTypes.length > 0);
   const getOwnerTypesLoaded = useSelector((state) => state.ownerTypes.ownerTypes.length > 0);
+  const getCurrentUserLoaded = useSelector((state) => state.user.currentUser !== null);
   const [formData, setFormData] = useState({
     title: '',
     price: '',
@@ -19,6 +21,7 @@ const PropertyForm = () => {
     address: '',
     images: [],
     description: '',
+    // created_by_id: '',
   });
 
   const handleChange = (e) => {
@@ -44,10 +47,14 @@ const PropertyForm = () => {
     if (!getOwnerTypesLoaded) {
       dispatch(getOwnerTypes());
     }
-  }, [dispatch, getPropTypesLoaded, getOwnerTypesLoaded]);
+    if (!getCurrentUserLoaded) {
+      dispatch(getCurrentUser());
+    }
+  }, [dispatch, getPropTypesLoaded, getOwnerTypesLoaded, getCurrentUserLoaded]);
 
   const propTypeOptions = useSelector((state) => state.propertyTypes.propertyTypes);
   const ownerTypeOptions = useSelector((state) => state.ownerTypes.ownerTypes);
+  const currentUserPost = useSelector(state => state.user.currentUser);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -60,9 +67,12 @@ const PropertyForm = () => {
     formDataToSend.append('property[property_type_id]', formData.property_type);
     formDataToSend.append('property[ownership_type_id]', formData.ownership_type);
     formDataToSend.append('property[address]', formData.address);
+    // formDataToSend.append('property[created_by_id]', formData.created_by_id);
+    formDataToSend.append('property[created_by_id]', currentUserPost.id);
     for (let i = 0; i < formData.images.length; i += 1) {
       formDataToSend.append('property[images][]', formData.images[i]);
     }
+    
     dispatch(createProperty(formDataToSend));
     setFormData({
       title: '',
@@ -74,6 +84,7 @@ const PropertyForm = () => {
       address: '',
       images: [],
       description: '',
+      // created_by_id: ''
     });
   };
 
@@ -147,6 +158,13 @@ const PropertyForm = () => {
             Description:
             <textarea name="description" onChange={handleChange} cols="30" rows="10" />
           </label>
+        </div>
+        <div>
+        {/* {currentUserPost && (
+          <div>
+            <input name="created_by_id" onChange={handleChange} type="text" value={currentUserPost.id} readOnly />
+          </div>
+        )} */}
         </div>
         <input type="submit" value="Create Property" />
       </form>

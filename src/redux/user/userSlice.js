@@ -23,6 +23,7 @@ const getInitialState = () => {
 
   return {
     user: storedUser ? JSON.parse(storedUser) : null,
+    currentUser: null,
     status: 'idle',
     error: null,
     authToken: storedAuthToken ? decryptData(storedAuthToken) : null,
@@ -117,11 +118,11 @@ export const getCurrentUser = createAsyncThunk(
       // Handle the case where authToken is not available
       throw new Error('Auth token not found.');
     }
-    // const headers = {
-    //   Authorization: authToken, // Include authToken in headers
-    // };
+    const headers = {
+      Authorization: authToken, // Include authToken in headers
+    };
 
-    const response = await axios.get(GET_CURRENT_USER_URL);
+    const response = await axios.get(GET_CURRENT_USER_URL, { headers });
     return response.data;
   },
 );
@@ -180,7 +181,13 @@ const userSlice = createSlice({
         ...state,
         loading: false,
         error: action.error.message,
-      }));
+      }))
+      .addCase(getCurrentUser.fulfilled, (state, action) => ({
+        ...state,
+        currentUser: action.payload,
+        loading: false,
+        error: null,
+      }))
   },
 });
 
