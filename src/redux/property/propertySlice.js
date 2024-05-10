@@ -48,8 +48,15 @@ const propertySlice = createSlice({
         error: null,
       }))
       .addCase(getProperties.fulfilled, (state, action) => ({
+        // ...state,
+        // properties: action.payload,
+        // loading: false,
+        // error: null,
         ...state,
-        properties: action.payload,
+        properties: action.payload.map(property => ({
+          ...property,
+          created_by_id_email: property.created_by_id.email, // Assuming email is nested in created_by_id
+        })),
         loading: false,
         error: null,
 
