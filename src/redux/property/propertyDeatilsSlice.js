@@ -3,6 +3,13 @@ import axios from 'axios';
 
 const GET_PROPERTITY_DETAILS_URL = 'http://127.0.0.1:3000/properties/';
 
+
+const initialState = {
+  propertyDetails: null,
+  loading: false,
+  error: null,
+};
+
 // Async thunk to fetch property details
 export const getPropertyDetails = createAsyncThunk(
   'properties/getPropertyDetails',
@@ -16,11 +23,6 @@ export const getPropertyDetails = createAsyncThunk(
   }
 );
 
-const initialState = {
-  propertyDetails: null,
-  loading: false,
-  error: null,
-};
 
 const propertyDetailsSlice = createSlice({
   name: 'properties',

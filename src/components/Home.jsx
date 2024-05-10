@@ -7,7 +7,6 @@ import '../main.scss';
 const Home = () => {
   const dispatch = useDispatch();
   const newProperites = useSelector((state) => state.properties.properties);
-  console.log(newProperites);
 
   useEffect(() => {
     dispatch(getProperties());

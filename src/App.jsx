@@ -4,17 +4,19 @@ import Navigation from './components/Navigation';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 import PropertyForm from './components/PropertyForm';
+import PropertyDetails from './components/ShowProperty';
 
 function App() {
   return (
     <>
       <Navigation />
-      <Home />
       <BrowserRouter>
         <Routes>
-          <Route exact path="/login-page" element={<Login />} />
-          <Route exact path="/dashboard-page" element={<Dashboard />} />
-          <Route exact path="/create-new-property" element={<PropertyForm />} />
+          <Route exact path="/" element={<Home />} />
+          <Route path="/login-page" element={<Login />} />
+          <Route path="/dashboard-page" element={<Dashboard />} />
+          <Route path="/create-new-property" element={<PropertyForm />} />
+          <Route path="/property-details/:id" element={<PropertyDetails />} />
         </Routes>
       </BrowserRouter>
     </>
