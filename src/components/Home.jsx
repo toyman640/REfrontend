@@ -21,8 +21,10 @@ const Home = () => {
             <div key={property.id}>
               <h4>{property.title}</h4>
               <p>{property.price}</p>
-              <p>{property.ownership_type_id_name}</p>
-              <p>Posted  by :{property.created_by_id_email} </p>
+              <p>{property.address}</p>
+              <p>For {property.ownership_type.name}</p>
+              <p>{property.property_type.name}</p>
+              <p>Posted  by :{property.created_by.email} </p>
             </div>
           ))}
         </div>
