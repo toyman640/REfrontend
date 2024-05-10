@@ -22,6 +22,20 @@ export const getPropertyDetails = createAsyncThunk(
   },
 );
 
+export const deleteProperty = createAsyncThunk(
+  'properties/deleteProperty',
+  async (propertyId, thunkAPI) => {
+    try {
+      // Delete property and associated images
+      const response = await axios.delete(`${GET_PROPERTITY_DETAILS_URL}/${propertyId}`);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  },
+
+);
+
 const propertyDetailsSlice = createSlice({
   name: 'properties',
   initialState,
