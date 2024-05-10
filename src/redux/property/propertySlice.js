@@ -48,10 +48,6 @@ const propertySlice = createSlice({
         error: null,
       }))
       .addCase(getProperties.fulfilled, (state, action) => ({
-        // ...state,
-        // properties: action.payload,
-        // loading: false,
-        // error: null,
         ...state,
         properties: action.payload.map(property => ({
           ...property,
