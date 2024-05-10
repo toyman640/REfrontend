@@ -46,7 +46,10 @@ const Dashboard = () => {
   return (
     <div>
       <h2>Dashboard Page</h2>
-      <p>Hello, {loggedUser.email}</p>
+      <p>
+        Hello,
+        {loggedUser.email}
+      </p>
       <button type="button" onClick={handleLogout}>Logout</button>
 
       {newProperties.length === 0 ? (

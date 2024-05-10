@@ -32,9 +32,9 @@ export const deleteProperty = createAsyncThunk(
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
-  }
+  },
 
-)
+);
 
 const propertyDetailsSlice = createSlice({
   name: 'properties',
