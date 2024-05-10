@@ -23,9 +23,15 @@ const Home = () => {
                 <h4>{property.title}</h4>
                 <p>{property.price}</p>
                 <p>{property.address}</p>
-                <p>For {property.ownership_type.name}</p>
+                <p>
+                  For
+                  {property.ownership_type.name}
+                </p>
                 <p>{property.property_type.name}</p>
-                <p>Posted  by :{property.created_by.email} </p>
+                <p>
+                  Posted  by :
+                  {property.created_by.email}
+                </p>
               </Link>
             </div>
           ))}

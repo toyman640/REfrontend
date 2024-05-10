@@ -3,7 +3,6 @@ import axios from 'axios';
 
 const GET_PROPERTITY_DETAILS_URL = 'http://127.0.0.1:3000/properties/';
 
-
 const initialState = {
   propertyDetails: null,
   loading: false,
@@ -20,9 +19,8 @@ export const getPropertyDetails = createAsyncThunk(
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
-  }
+  },
 );
-
 
 const propertyDetailsSlice = createSlice({
   name: 'properties',
