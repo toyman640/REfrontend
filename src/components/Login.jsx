@@ -1,12 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { loginUser } from '../redux/user/userSlice';
+import { mopUp } from '../redux/user/userSlice';
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({ email: '', password: '' });
+
+  useEffect(() => {
+    mopUp();
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;

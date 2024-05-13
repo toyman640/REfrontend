@@ -153,6 +153,11 @@ export const logOutUser = createAsyncThunk(
   },
 );
 
+export const mopUp = () => {
+  localStorage.removeItem('user');
+  localStorage.removeItem('authToken');
+};
+
 const userSlice = createSlice({
   name: 'user',
   initialState,
