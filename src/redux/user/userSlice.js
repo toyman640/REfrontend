@@ -34,64 +34,6 @@ const getInitialState = () => {
 
 const initialState = getInitialState();
 
-// const initialState = {
-//   user: null,
-//   authToken: null,
-
-// }
-
-// export const loginUser = createAsyncThunk(
-//   'user/loginUser',
-//   async (userData) => {
-//     try {
-//       const headers = {
-//         'Content-Type': 'application/json',
-//       };
-
-//       const response = await axios.post(LOGIN_URL, userData, {
-//         headers,
-//       });
-
-//       const authToken = response.headers.authorization;
-//       return { user: response.data, authToken };
-//       // /return response.data;
-//     } catch (error) {
-//       throw error;
-//     }
-//   },
-// );
-
-// export const logOutUser = createAsyncThunk(
-//   'user/logOutUser',
-//   async (_, { getState }) => { // Accept authToken as an argument
-//     try {
-//       // console.log(authToken);
-//       const state = getState(); // Get the current state
-//       const authToken = state.user.authToken || initialState.authToken;
-
-//       if (!authToken) {
-//         // Handle the case where authToken is not available
-//         throw new Error('Auth token not found.');
-//       }
-//       const headers = {
-//         Authorization: authToken, // Include authToken in headers
-//       };
-
-//       const response = await axios.delete(LOGOUT_URL, { headers });
-
-//       if (response.status === 200) {
-//         // Clear local storage if logout is successful
-//         localStorage.removeItem('user');
-//         localStorage.removeItem('authToken');
-//       }
-
-//       return response.data;
-//     } catch (error) {
-//       throw error;
-//     }
-//   },
-// );
-
 export const loginUser = createAsyncThunk(
   'user/loginUser',
   async (userData) => {
