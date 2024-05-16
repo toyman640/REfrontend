@@ -40,7 +40,7 @@ const Dashboard = () => {
   };
 
   if (!newProperties) {
-    return <div>Loading...</div>;
+    return <div>Loading1...</div>;
   }
 
   return (

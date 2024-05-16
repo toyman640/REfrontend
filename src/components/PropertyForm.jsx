@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 import { getPropertyTypes } from '../redux/Categories/propTypeSlice';
 import { getOwnerTypes } from '../redux/Categories/ownershipTypeSlice';
 import { createProperty } from '../redux/property/propertySlice';
-import { getCurrentUser } from '../redux/user/userSlice';
+import { getCurrentUser, mopUp } from '../redux/user/userSlice';
 
 const PropertyForm = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate;
   const getPropTypesLoaded = useSelector((state) => state.propertyTypes.propertyTypes.length > 0);
   const getOwnerTypesLoaded = useSelector((state) => state.ownerTypes.ownerTypes.length > 0);
   const getCurrentUserLoaded = useSelector((state) => state.user.currentUser !== null);
@@ -54,8 +56,20 @@ const PropertyForm = () => {
   const ownerTypeOptions = useSelector((state) => state.ownerTypes.ownerTypes);
   const currentUserPost = useSelector((state) => state.user.currentUser);
 
+  useEffect(() => {
+    if (currentUserPost && currentUserPost.status === 401) {
+      navigate('/login-page');
+    }
+  }, [currentUserPost, navigate]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!getCurrentUserLoaded) {
+      dispatch(mopUp());
+      navigate.push('/login-page');
+      return;
+    }
+
     const formDataToSend = new FormData();
     formDataToSend.append('property[title]', formData.title);
     formDataToSend.append('property[price]', formData.price);
