@@ -55,7 +55,6 @@ const PropertyForm = () => {
   const propTypeOptions = useSelector((state) => state.propertyTypes.propertyTypes);
   const ownerTypeOptions = useSelector((state) => state.ownerTypes.ownerTypes);
   const currentUserPost = useSelector((state) => state.user.currentUser);
-  console.log(currentUserPost);
 
   useEffect(() => {
     if (currentUserPost && currentUserPost.status === 401) {

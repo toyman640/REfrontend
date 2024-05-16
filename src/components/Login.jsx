@@ -28,7 +28,6 @@ const Login = () => {
     dispatch(loginUser(userData))
       .then((action) => {
         if (action.payload.user.status.code === 200) {
-          console.log('log ran');
           navigate('/dashboard-page');
         } else {
           navigate('/login-page');

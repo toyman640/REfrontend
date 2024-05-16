@@ -66,8 +66,6 @@ export const getCurrentUser = createAsyncThunk(
     };
 
     const response = await axios.get(GET_CURRENT_USER_URL, { headers });
-    console.log(response);
-    console.log('i got current user');
     return response.data;
   },
 );
