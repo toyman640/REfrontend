@@ -8,7 +8,7 @@ import { getCurrentUser, mopUp } from '../redux/user/userSlice';
 
 const PropertyForm = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate
+  const navigate = useNavigate;
   const getPropTypesLoaded = useSelector((state) => state.propertyTypes.propertyTypes.length > 0);
   const getOwnerTypesLoaded = useSelector((state) => state.ownerTypes.ownerTypes.length > 0);
   const getCurrentUserLoaded = useSelector((state) => state.user.currentUser !== null);
@@ -55,11 +55,18 @@ const PropertyForm = () => {
   const propTypeOptions = useSelector((state) => state.propertyTypes.propertyTypes);
   const ownerTypeOptions = useSelector((state) => state.ownerTypes.ownerTypes);
   const currentUserPost = useSelector((state) => state.user.currentUser);
+  console.log(currentUserPost);
+
+  useEffect(() => {
+    if (currentUserPost && currentUserPost.status === 401) {
+      navigate('/login-page');
+    }
+  }, [currentUserPost, navigate]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!getCurrentUserLoaded) {
-      dispatch(mopUp())
+      dispatch(mopUp());
       navigate.push('/login-page');
       return;
     }

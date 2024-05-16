@@ -25,6 +25,7 @@ const getInitialState = () => {
     user: storedUser ? JSON.parse(storedUser) : null,
     currentUser: null,
     status: 'idle',
+    loadingCurrentUser: false,
     error: null,
     authToken: storedAuthToken ? decryptData(storedAuthToken) : null,
   };
@@ -65,6 +66,8 @@ export const getCurrentUser = createAsyncThunk(
     };
 
     const response = await axios.get(GET_CURRENT_USER_URL, { headers });
+    console.log(response);
+    console.log('i got current user');
     return response.data;
   },
 );
@@ -129,11 +132,21 @@ const userSlice = createSlice({
         loading: false,
         error: action.error.message,
       }))
+      .addCase(getCurrentUser.pending, (state) => ({
+        ...state,
+        loadingCurrentUser: true,
+        error: null,
+      }))
       .addCase(getCurrentUser.fulfilled, (state, action) => ({
         ...state,
         currentUser: action.payload,
         loading: false,
         error: null,
+      }))
+      .addCase(getCurrentUser.rejected, (state, action) => ({
+        ...state,
+        loading: false,
+        error: action.error.message,
       }));
   },
 });

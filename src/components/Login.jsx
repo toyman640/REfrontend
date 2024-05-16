@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { loginUser } from '../redux/user/userSlice';
-import { mopUp } from '../redux/user/userSlice';
+import { loginUser, mopUp } from '../redux/user/userSlice';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -29,6 +28,7 @@ const Login = () => {
     dispatch(loginUser(userData))
       .then((action) => {
         if (action.payload.user.status.code === 200) {
+          console.log('log ran');
           navigate('/dashboard-page');
         } else {
           navigate('/login-page');
