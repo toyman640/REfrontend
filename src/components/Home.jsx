@@ -13,7 +13,11 @@ const Home = () => {
   }, [dispatch]);
   return (
     <div>
-      <h1 className="MainComponent">This is home page</h1>
+      <div className="BannerPart">
+        <div className="MessagePart">
+          <h1 className="MainComponent">This is home page</h1>
+        </div>
+      </div>
       <div>
         <h3>Latest propertties</h3>
         <div>
