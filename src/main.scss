@@ -13,19 +13,80 @@ body {
 
 .Logo {
   width: 30%;
+  font-size: 1.2em;
+  margin-left: 10%;
 }
 
 .LogoSpace {
-  margin-left: 8%;
+  margin-left: 10%;
+  border: 1px solid red;
+}
+
+// .Naviagation {
+//   display: none;
+// }
+
+.Navigation {
+  display: $flex;
+  position: absolute;
+  // background-color: #4f7942;
+  padding: 0;
+  margin: 0;
+}
+
+.MenuContents {
+  display: none;
+}
+
+.MobileMenuBottom {
+  position: fixed;
+  background-color: #fff;
+  width: 100%;
+  bottom: 0;
+  transition: transform 0.3s ease-in-out;
+  border: 1px solid red;
+}
+
+.MobileMenuBottom.hidden {
+  transform: translateY(100%);
+}
+
+.MobileMenuContents {
+  display: $flex;
+  list-style: none;
+  justify-content: space-around;
+  padding: 0;
+}
+
+.BannerPart {
+  height: 100vh;
+  background-image: url("./assets/banner-image.jpg");
+  background-size: cover;
+  background-position: center;
+  padding-top: 10%;
+  border: 1px solid red;
+  margin-top: 0;
+}
+
+// .MessagePart {
+//   display: flex;
+//   background-color: ;
+// }
+
+.BannerPart::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: inherit;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 1; 
 }
 
 @media (min-width: 768px) {
-  .Navigation {
-    display: $flex;
-    background-color: #4f7942;
-    border: 0;
-    padding: 0;
-    margin: 0;
+  .MobileMenuBottom {
+    display: none;
   }
 
   .MenuContents {
