@@ -39,7 +39,20 @@ body {
 
 .MobileLogo {
   font-size: $logoSize;
+  color: $primaryColor;
+  font-family: $mainFont;
+  padding-left: 5%;
+  line-height: 40%;
+  
+}
+
+.MobileLogoDiv {
+  width: 90%;
+  background-color: $whiteColor;
   margin-left: 5%;
+  height: 40px;
+  border-radius: 32px;
+  margin-top: 2%;
 }
 
 .MenuContents {
@@ -68,11 +81,43 @@ body {
 
 .BannerPart {
   height: 100vh;
-  background-image: url("./assets/banner1-image.jpg");
+  background-color: $primaryColor;
   background-size: cover;
   background-position: center;
   padding-top: 10%;
   margin-top: 0;
+}
+
+.BannerContent {
+  margin-top: 30%;
+  width: 90%;
+  margin-left: 5%;
+}
+
+.BannerTopText {
+  color: $whiteColor;
+  font-family: $mainFont;
+  width: 55%;
+  font-size: 0.9em;
+  margin-bottom: 0;
+}
+
+.BannerMainText {
+  color: $whiteColor;
+  font-weight: 700;
+  font-family: $mainFont;
+  font-size: 2.2em;
+  width: 90%;
+  margin-top: 0;
+  padding-top: 0;
+  margin-bottom: 0;
+}
+
+.BannerBottomText {
+  margin-top: 0;
+  color: $whiteColor;
+  width: 90%;
+  font-size: 0.9em;
 }
 
 // .MessagePart {
@@ -96,6 +141,10 @@ body {
     display: none;
   }
 
+  .MobileLogoDiv {
+    display: none;
+  }
+
   .DeskTopNav {
     width: 80%;
     display: $flex;
@@ -105,6 +154,15 @@ body {
     justify-content: space-between;
     border-radius: 32px;
     padding: 0 1%  0 1%;
+  }
+
+  .BannerPart {
+    height: 100vh;
+    background-image: url("./assets/banner1-image.jpg");
+    background-size: cover;
+    background-position: center;
+    padding-top: 10%;
+    margin-top: 0;
   }
 
   .DeskTopLogo {

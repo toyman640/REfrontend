@@ -17,7 +17,7 @@ const Home = () => {
         <div className="BannerContent">
           <div>
             <p className="BannerTopText">Not just a roof over your head...A HOME!!!</p>
-            <h1 className="BannerMainText">MOST RELIABLE REAL ESTATE COMPANY</h1>
+            <h1 className="BannerMainText">MOST RELIABLE REAL ESTATE COMPANY.</h1>
             <p className="BannerBottomText">Many real estate firm can find you an apratment, let us find you a home without making you break a sweat.</p>
           </div>
           <div>
