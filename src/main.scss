@@ -1,6 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Inclusive+Sans&family=Pacifico&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+
 $myColor: yellow;
 $flex: flex;
-$primaryColor: #4f7942;
+$primaryColor: #060c14;
+$whiteColor: #fff;
+$logoSize: 1.3em;
+$mainFont: "Poppins", sans-serif;
 
 body {
   margin: 0;
@@ -11,22 +16,30 @@ body {
   color: $myColor;
 }
 
-.Logo {
-  width: 30%;
-  font-size: 1.2em;
-  margin-left: 10%;
-}
+// .Logo {
+//   width: 30%;
+//   font-size: 1.2em;
+// }
 
-.LogoSpace {
-  margin-left: 10%;
-  border: 1px solid red;
-}
+// .LogoSpace {
+//   margin-left: 10%;
+// }
 
 .Navigation {
   display: $flex;
+  width: 100%;
   position: absolute;
   padding: 0;
   margin: 0;
+}
+
+.DeskTopLogo{
+  display: none;
+}
+
+.MobileLogo {
+  font-size: $logoSize;
+  margin-left: 5%;
 }
 
 .MenuContents {
@@ -55,11 +68,10 @@ body {
 
 .BannerPart {
   height: 100vh;
-  background-image: url("./assets/banner-image.jpg");
+  background-image: url("./assets/banner1-image.jpg");
   background-size: cover;
   background-position: center;
   padding-top: 10%;
-  border: 1px solid red;
   margin-top: 0;
 }
 
@@ -75,7 +87,7 @@ body {
   left: 0;
   width: 100%;
   height: inherit;
-  background-color: rgba(0, 0, 0, 0.2);
+  // background-color: rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
 
@@ -84,43 +96,66 @@ body {
     display: none;
   }
 
+  .DeskTopNav {
+    width: 80%;
+    display: $flex;
+    margin-top: 1%;
+    margin-left: 10%;
+    background-color: #060c14;
+    justify-content: space-between;
+    border-radius: 32px;
+    padding: 0 1%  0 1%;
+  }
+
+  .DeskTopLogo {
+    display: block;
+    font-size: $logoSize;
+    color: $whiteColor;
+  }
+
+  .MobileLogo{
+    display: none;
+  }
+
   .MenuContents {
     display: $flex;
-    width: 70%;
-    justify-content: space-around;
+    width: 30%;
+    color: $whiteColor;
   }
 
   .MenuItems {
     display: $flex;
     list-style: none;
-    width: 30%;
+    width: 100%;
     justify-content: space-between;
   }
 
-  .SearchForm {
-    margin-top: 2%;
+  .BannerContent {
+    margin-left: 10%;
+    margin-top: 6%;
+  }
+
+  .BannerTopText {
+    color: $primaryColor;
+    font-family: $mainFont;
+    font-size: 1em;
+    margin-bottom: 0;
+  }
+
+  .BannerMainText {
+    color: $primaryColor;
+    font-weight: 700;
+    font-family: $mainFont;
+    font-size: 4em;
     width: 50%;
+    margin-top: 0;
+    padding-top: 0;
+    margin-bottom: 0;
   }
 
-  .SearchInput {
-    width: 80%;
-    height: 60%;
-    border-radius: 8px;
-    border: none;
-    padding-left: 2%;
-
-    &:focus {
-      /// box-shadow: 0 0 5px rgba(81, 203, 238, 1) !important;
-      border: 1px solid rgba(81, 203, 238, 1) !important;
-    }
-  }
-
-  .SubmitButton {
-    margin-left: 2%;
-    padding: 5px 12px;
-    border: none;
-    border-radius: 8px;
-    background-color: #fff;
+  .BannerBottomText {
+    margin-top: 0;
+    width: 37%;
   }
 }
 // Navigation
