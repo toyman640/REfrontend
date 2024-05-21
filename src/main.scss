@@ -120,6 +120,22 @@ body {
   font-size: 0.9em;
 }
 
+.FormSection {
+  border: 1px solid red;
+  margin-top: 80%;
+}
+
+.FormFieldLabel {
+  width: 100%;
+  border: 1px solid red;
+}
+
+.FormField {
+  width: 100%;
+  border: none;
+  border: 1px solid red;
+}
+
 // .MessagePart {
 //   display: flex;
 //   background-color: ;
