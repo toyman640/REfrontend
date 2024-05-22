@@ -10,6 +10,7 @@ const PropertyDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const propertyDetails = useSelector((state) => state.propertyDetails.propertyDetails);
+  console.log(propertyDetails);
 
   useEffect(() => {
     dispatch(getPropertyDetails(id));
