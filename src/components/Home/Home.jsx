@@ -14,36 +14,36 @@ const Home = () => (
         </div>
         <div className="FormSection">
           <form action="" className="SearchForm">
-            <label htmlFor="" className="FormFieldLabel">
+            <label htmlFor="deal" className="FormFieldLabel">
               Deal Type
               {' '}
               <br />
-              <select name="" id="" className="FormField">
+              <select name="deal" id="" className="FormField">
                 <option value="">Rent</option>
                 <option value="">Sale</option>
                 <option value="">Lease</option>
                 <option value="">Any</option>
               </select>
             </label>
-            <label htmlFor="" className="FormFieldLabel">
+            <label htmlFor="category" className="FormFieldLabel">
               Property Category
               {' '}
               <br />
-              <select name="" id="" className="FormField">
+              <select name="category" id="" className="FormField">
                 <option value="">Buildings</option>
                 <option value="">Lands</option>
                 <option value="">Residential</option>
                 <option value="">Commercial</option>
               </select>
             </label>
-            <label htmlFor="" className="FormFieldLabel">
+            <label htmlFor="price" className="FormFieldLabel">
               Maximun Price
               {' '}
               <br />
               <input type="number" name="price" id="" className="FormInput" placeholder="300000" />
             </label>
 
-            <button type="button" className="SearchButton"><FaSearch /></button>
+            <button type="button" className="SearchButton" aria-label="Search"><FaSearch /></button>
           </form>
         </div>
       </div>
