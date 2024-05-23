@@ -266,6 +266,19 @@ body {
     margin-top: 10%;
   }
 
+  .Ttile {
+    text-align: center;
+    color: $primaryColor;
+    font-family: $mainFont;
+    font-size: 1.7em;
+  }
+
+  .UnderLine {
+    width: 5%;
+    margin-top: 0%;
+    border: 2px solid #ff7625;
+  }
+
   .LatestPost {
     display: $flex;
     width: 80%;
@@ -282,8 +295,6 @@ body {
   }
 
   .CardContent {
-    // background-color: #9b9b9b;
-    // padding: 3%;
     font-family: $mainFont;
     color: $primaryColor;
     text-decoration: none;
@@ -294,11 +305,10 @@ body {
   }
 
   .CardImage {
-    // height: 160px;
     object-fit: contain;
     width: 100%;
-    height: 100%;
-    border-radius: 10px;
+    height: 90%;
+    border-radius: 20px;
   }
 
   .ImageCardDiv {
@@ -313,7 +323,6 @@ body {
     font-weight: 500;
     padding: 0 2% ;
     border-left: 10px solid transparent;
-    // border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
     transform: skew(-15deg);
   }
@@ -322,7 +331,13 @@ body {
     font-weight: 700;
   }
   
-  
+  .MoreDeatils {
+    display: flex;
+    justify-content: space-between;
+    width: 40%;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
   
   
 }
