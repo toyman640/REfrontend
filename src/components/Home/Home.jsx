@@ -1,5 +1,6 @@
 import React from 'react';
 import SecondSection from './SecondSection';
+import { FaSearch } from "react-icons/fa";
 import '../../main.scss';
 
 
@@ -38,7 +39,7 @@ const Home = () => {
                 <input type="number" name="price" id="" className="FormInput" placeholder="300000"  />
               </label>
 
-              <button type="button">Submit</button>
+              <button type="button" className="SearchButton"><FaSearch /></button>
             </form>
           </div>
         </div>

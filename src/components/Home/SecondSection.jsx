@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getProperties } from '../../redux/property/propertySlice';
+import { formatDistanceToNow } from 'date-fns';
 import { Link } from 'react-router-dom';
 import { FaBath, FaBed, FaWallet  } from "react-icons/fa";
 
@@ -34,18 +35,18 @@ const SecondSection = () => {
                   {property.ownership_type.name}
                 </p>
                 <p className="CardTiltle">{property.title}</p>
-                <p><FaWallet /> &#x20A6; {formatPrice(property.price)}</p>
+                <p className="CardPrice"><FaWallet /> &#x20A6; {formatPrice(property.price)}</p>
                 <div className="MoreDeatils">
-                 <p><FaBath /> {property.no_of_bathrooms}</p>
-                 <p><FaBed /> {property.no_of_rooms}</p>
+                 <p className="CardPrice"><FaBath /> {property.no_of_bathrooms}</p>
+                 <p className="CardPrice"><FaBed /> {property.no_of_rooms}</p>
                 </div>
-                <p>{property.created_at}</p>
+                <p className="TimeTag">Posted: {formatDistanceToNow(new Date(property.created_at), { addSuffix: true })}</p>
                 {/* <p>{property.address}</p> */}
                 
-                <p>
+                {/* <p>
                   Posted  by :
                   {property.created_by.email}
-                </p>
+                </p> */}
               </div>
             </Link>
           </div>
