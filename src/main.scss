@@ -33,7 +33,7 @@ body {
   margin: 0;
 }
 
-.DeskTopLogo{
+.DeskTopLogo {
   display: none;
 }
 
@@ -43,7 +43,6 @@ body {
   font-family: $mainFont;
   padding-left: 5%;
   line-height: 40%;
-  
 }
 
 .MobileLogoDiv {
@@ -121,7 +120,6 @@ body {
 }
 
 .FormSection {
-
   margin-top: 80%;
 }
 
@@ -132,7 +130,6 @@ body {
 .FormField {
   width: 100%;
   border: none;
-
 }
 
 // .MessagePart {
@@ -186,7 +183,7 @@ body {
     color: $whiteColor;
   }
 
-  .MobileLogo{
+  .MobileLogo {
     display: none;
   }
 
@@ -257,7 +254,6 @@ body {
     font-weight: 700;
     margin-left: 2%;
     border-radius: 10px;
-
   }
 
   .FormInput {
@@ -299,7 +295,6 @@ body {
     width: 80%;
     margin-left: 10%;
     justify-content: space-between;
-
   }
 
   .PropertyCard {
@@ -338,7 +333,7 @@ body {
     color: $primaryColor;
     font-family: $mainFont;
     font-weight: 500;
-    padding: 0 2% ;
+    padding: 0 2%;
     border-left: 10px solid transparent;
     border-bottom-right-radius: 15px;
     transform: skew(-15deg);
@@ -355,7 +350,7 @@ body {
   .TimeTag {
     font-size: 0.7em;
   }
-  
+
   .MoreDeatils {
     display: flex;
     justify-content: space-between;
@@ -363,7 +358,5 @@ body {
     margin-top: 0;
     margin-bottom: 0;
   }
-  
-  
 }
 // Navigation
