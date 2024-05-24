@@ -405,5 +405,39 @@ body {
     width: 80%;
     margin-left: 10%;
   }
+
+  .Footer {
+    background-color: $primaryColor;
+    color: $whiteColor;
+    font-family: $mainFont;
+    border: 1px solid $primaryColor
+  }
+
+  .FooterInner {
+    display: $flex;
+    padding: 5% 0 5% 0;
+    width: 80%;
+    margin-left: 10%;
+    justify-content: space-around;
+  }
+
+  .CopyRight {
+    text-align: center;
+    padding-bottom: 2%;
+  }
+
+  .MenuDiv {
+    width: 50%;
+    // border: 1px solid red;
+  }
+
+  .FooterMenu {
+    list-style: none;
+    width: 100%;
+  }
+
+  .MenuHr {
+    border: 2px solid #ff7625;
+  }
 }
 // Navigation

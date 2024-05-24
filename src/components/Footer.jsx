@@ -3,23 +3,24 @@ import React from "react";
 const Footer = () => {
   return (
     <div className="Footer">
-      <div>
+      <div className="FooterInner">
         <div>
-          <h2 className="MobileLogo">
+          <h2>
             {' '}
-            <span className="LogoSpace">LOGO</span>
+            <span>LOGO</span>
           </h2>
           <p>contact@mail.com</p>
         </div>
-        <div>
-          <ul>
-            <li>Home</li>
-            <li>About</li>
-            <li>Blog</li>
-            <li>Contact</li>
+        <div className="MenuDiv">
+          <ul className="FooterMenu">
+            <li>Home <hr className="MenuHr" /></li>
+            <li>About <hr className="MenuHr" /></li>
+            <li>Blog <hr className="MenuHr" /></li>
+            <li>Contact <hr className="MenuHr" /></li>
           </ul>
         </div>
       </div>
+      <p className="CopyRight">Copyright &#169;2024</p>
     </div>
   );
 };
