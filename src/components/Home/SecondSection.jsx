@@ -55,8 +55,8 @@ const SecondSection = () => {
                   </p>
                 </div>
                 <p className="TimeTag">
-                  Posted 
-                   {formatDistanceToNow(new Date(property.created_at), { addSuffix: true })}
+                  Posted
+                  {formatDistanceToNow(new Date(property.created_at), { addSuffix: true })}
                 </p>
                 {/* <p>{property.address}</p> */}
 
