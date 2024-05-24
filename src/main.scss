@@ -358,5 +358,52 @@ body {
     margin-top: 0;
     margin-bottom: 0;
   }
+
+  .ServiceSection {
+    margin-bottom: 8%;
+  }
+
+  .GridChild {
+    display: $flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(255, 118, 37, 0.1);
+    border-radius: 10px;
+    padding: 6% 6% 6% 6%;
+    
+  }
+
+  .ServiceIcon {
+    padding: 7% 7% 7% 7%;
+    font-size: 3em;
+    background-color: rgba(255, 118, 37, 0.3);
+    border-radius: 50%;
+    color: #ff7625;
+    margin-bottom: 0;
+    height: 50px;
+  }
+
+  .ServiceTitle {
+    font-family: $mainFont;
+    font-weight: 700;
+    font-size: 1.6em;
+  }
+
+  .ServiceText {
+    margin-top: 0;
+    text-align: center;
+    font-size: $mainFont;
+    font-size: 1.2em;
+    width: 80%;
+    margin-bottom: 11%;
+  }
+
+  .ServiceContent {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 80%;
+    margin-left: 10%;
+  }
 }
 // Navigation

@@ -1,6 +1,8 @@
 import React from 'react';
 import { FaSearch } from 'react-icons/fa';
 import SecondSection from './SecondSection';
+import OurServices from './OurServices';
+import Footer from '../Footer';
 import '../../main.scss';
 
 const Home = () => (
@@ -50,6 +52,12 @@ const Home = () => (
     </div>
     <div>
       <SecondSection />
+    </div>
+    <div>
+      <OurServices />
+    </div>
+    <div>
+      <Footer />
     </div>
   </div>
 );
