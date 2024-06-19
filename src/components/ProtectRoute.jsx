@@ -16,7 +16,7 @@ const ProtectRoute = ({ element: Component }) => {
 
   const currentUser = useSelector((state) => state.user.currentUser);
 
-  return currentUser ? <Component element={Component} /> : <Navigate to="login-page" />;
+  return currentUser ? <Component element={Component} /> : <Navigate to="/login-page" />;
 };
 
 ProtectRoute.propTypes = {
