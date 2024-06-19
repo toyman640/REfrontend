@@ -43,12 +43,16 @@ const Navigation = () => {
             </form> */}
             <ul className="MenuItems">
               <li>
-                
+                <Link to="/">
                   Home
-             
+                </Link>
               </li>
-              <li>Rent</li>
-              <li>Properties</li>
+              <li>
+                Rents
+              </li>
+              <li>
+                Properties
+              </li>
               <li>Contact</li>
             </ul>
           </div>

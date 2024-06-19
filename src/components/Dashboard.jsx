@@ -44,7 +44,7 @@ const Dashboard = () => {
   }
 
   return (
-    <div>
+    <div className="DashboardPage">
       <h2>Dashboard Page</h2>
       <p>
         Hello,
