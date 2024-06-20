@@ -27,20 +27,20 @@ const Login = () => {
       },
     };
     dispatch(loginUser(userData))
-    .then((action) => {
-      if (action.payload && action.payload.user.status.code === 200) {
-        navigate('/dashboard-page');
-      } else {
-        setErrorMessage('Login credentials are incorrect. Please try again.');
-      }
-    })
-    .catch((error) => {
-      if (error.response && error.response.status === 401) {
-        setErrorMessage('Login credentials are incorrect. Please try again.');
-      } else {
-        setErrorMessage('An error occurred. Please try again.');
-      }
-    });
+      .then((action) => {
+        if (action.payload && action.payload.user.status.code === 200) {
+          navigate('/dashboard-page');
+        } else {
+          setErrorMessage('Login credentials are incorrect. Please try again.');
+        }
+      })
+      .catch((error) => {
+        if (error.response && error.response.status === 401) {
+          setErrorMessage('Login credentials are incorrect. Please try again.');
+        } else {
+          setErrorMessage('An error occurred. Please try again.');
+        }
+      });
   };
 
   return (
