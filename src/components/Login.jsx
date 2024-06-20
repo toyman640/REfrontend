@@ -7,6 +7,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({ email: '', password: '' });
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     mopUp();
@@ -27,33 +28,39 @@ const Login = () => {
     };
     dispatch(loginUser(userData))
       .then((action) => {
-        if (action.payload.user.status.code === 200) {
+        if (action.payload && action.payload.user.status.code === 200) {
           navigate('/dashboard-page');
         } else {
-          navigate('/login-page');
+          setErrorMessage('Login credentials are incorrect. Please try again.');
         }
       })
-      .catch(() => {
+      .catch((error) => {
+        if (error.response && error.response.status === 401) {
+          setErrorMessage('Login credentials are incorrect. Please try again.');
+        } else {
+          setErrorMessage('An error occurred. Please try again.');
+        }
       });
   };
 
   return (
-    <div>
-      <h2>Login Page</h2>
+    <div className="Login-page">
+      <h2 className="Title">Login to your dashboard</h2>
+      {errorMessage && <p className="ErrorMessage">{errorMessage}</p>}
       <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="email">
+        <div className="LoginField">
+          <label className="FormLabel" htmlFor="email">
             Email
-            <input type="email" name="email" id="email" value={formData.email} onChange={handleInputChange} />
+            <input type="email" name="email" id="email" className="InputField" value={formData.email} onChange={handleInputChange} />
           </label>
         </div>
-        <div>
-          <label htmlFor="password">
+        <div className="LoginField">
+          <label className="FormLabel" htmlFor="password">
             Password
-            <input type="password" name="password" id="password" value={formData.password} onChange={handleInputChange} />
+            <input type="password" name="password" className="InputField" id="password" value={formData.password} onChange={handleInputChange} />
           </label>
         </div>
-        <input type="submit" value="Login" />
+        <input type="submit" className="LoginButton" value="Login" />
       </form>
     </div>
   );

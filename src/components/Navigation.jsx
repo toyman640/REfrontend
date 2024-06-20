@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Navigation = () => {
   const [isScrollingDown, setIsScrollingDown] = useState(false);
@@ -41,9 +42,17 @@ const Navigation = () => {
               <button type="button" className="SubmitButton">Search</button>
             </form> */}
             <ul className="MenuItems">
-              <li>Home</li>
-              <li>Rent</li>
-              <li>Sale</li>
+              <li>
+                <Link to="/">
+                  Home
+                </Link>
+              </li>
+              <li>
+                Rents
+              </li>
+              <li>
+                Properties
+              </li>
               <li>Contact</li>
             </ul>
           </div>
