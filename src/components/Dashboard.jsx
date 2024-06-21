@@ -45,11 +45,14 @@ const Dashboard = () => {
 
   return (
     <div className="DashboardPage">
-      <h2>Dashboard Page</h2>
-      <p>
-        Hello,
-        {loggedUser.email}
-      </p>
+      <div className="">
+        <h2>Dashboard Page</h2>
+        <p>
+          Hello,
+          {loggedUser.email}
+        </p>
+      </div>
+      <Link to="/create-new-property">Post new Property</Link>
       <button type="button" onClick={handleLogout}>Logout</button>
 
       {newProperties.length === 0 ? (
@@ -58,10 +61,10 @@ const Dashboard = () => {
           <Link to="/create-new-property">Post new Property</Link>
         </div>
       ) : (
-        <div>
-          <table>
-            <thead>
-              <tr>
+        <div className="TableDiv">
+          <table className="DashboardTable">
+            <thead className="TableHead" >
+              <tr style={{ border: '1px solid red' }}>
                 <th>Title</th>
                 <th>Price</th>
                 <th>Date Posted</th>
@@ -82,7 +85,6 @@ const Dashboard = () => {
               ))}
             </tbody>
           </table>
-          <Link to="/create-new-property">Post new Property</Link>
         </div>
       )}
     </div>
