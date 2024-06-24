@@ -513,7 +513,26 @@ body {
   }
 
   .TableHead {
-    border: 1px solid red;
+    border: 5px solid red;
   }
+
+  .AuthContent {
+    display: $flex;
+    justify-content: space-between;
+    color:$whiteColor;
+    width: 100%;
+    list-style: none;
+  }
+
+  .LogOutButton {
+    background-color: inherit;
+    color: #fff;
+    font-family: $mainFont;
+    border: 2px solid #ff7625;
+    padding: 5% 15%;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
 }
 // Navigation

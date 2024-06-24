@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { logOutUser } from '../redux/user/userSlice';
 
 const Navigation = () => {
   const [isScrollingDown, setIsScrollingDown] = useState(false);
   const [lastScrollTop, setLastScrollTop] = useState(0);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const loggedUserIn = useSelector((state) => state.user.user);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,6 +28,15 @@ const Navigation = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollTop]);
 
+  const handleLogout = () => {
+    dispatch(logOutUser())
+      .then(() => {
+        navigate('/login-page');
+      })
+      .catch(() => {
+      });
+  };
+
   return (
     <>
       <div className="Navigation">
@@ -36,6 +51,18 @@ const Navigation = () => {
             {' '}
             <span className="LogoSpace">LOGO</span>
           </h2>
+          {loggedUserIn && (
+            <div className="AuthMenu">
+              <ul className="AuthContent">
+                <li>
+                  Hello, {loggedUserIn.email}
+                </li>
+                <li>
+                  <button type="button" className="LogOutButton" onClick={handleLogout}>Logout</button>
+                </li>
+              </ul>
+            </div>
+          )}
           <div className="MenuContents">
             {/* <form action="" className="SearchForm">
               <input className="SearchInput" type="text" placeholder="Search Property" />

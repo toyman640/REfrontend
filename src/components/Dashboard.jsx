@@ -1,13 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { logOutUser } from '../redux/user/userSlice';
 import { getProperties } from '../redux/property/propertySlice';
 import { deleteProperty } from '../redux/property/propertyDeatilsSlice';
 
 const Dashboard = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const loggedUser = useSelector((state) => state.user.user);
   const newProperties = useSelector((state) => state.properties.properties);
 
@@ -15,14 +13,14 @@ const Dashboard = () => {
     dispatch(getProperties());
   }, [dispatch]);
 
-  const handleLogout = () => {
-    dispatch(logOutUser())
-      .then(() => {
-        navigate('/login-page');
-      })
-      .catch(() => {
-      });
-  };
+  // const handleLogout = () => {
+  //   dispatch(logOutUser())
+  //     .then(() => {
+  //       navigate('/login-page');
+  //     })
+  //     .catch(() => {
+  //     });
+  // };
 
   const formatDateTime = (dateTimeString) => {
     const dateTime = new Date(dateTimeString);
@@ -53,7 +51,6 @@ const Dashboard = () => {
         </p>
       </div>
       <Link to="/create-new-property">Post new Property</Link>
-      <button type="button" onClick={handleLogout}>Logout</button>
 
       {newProperties.length === 0 ? (
         <div>
