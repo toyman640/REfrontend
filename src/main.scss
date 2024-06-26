@@ -513,7 +513,69 @@ body {
   }
 
   .TableHead {
-    border: 5px solid red;
+    background-color: #ff7625;
+    color: #fff;
+  }
+
+  .TableHead th, .TableBody td {
+    border-bottom: 1px solid #ddd;
+    padding: 8px;
+    font-family: $mainFont;
+    text-align: center;
+  }
+
+  .AddIcon {
+    color: green;
+  }
+
+  .NewProp {
+    text-decoration: none;
+  }
+
+  .PropButton {
+    text-decoration: none;
+    color: #060c14;
+    border: 2px solid $primaryColor;
+    float: right;
+    text-align: center;
+    width: 12%;
+    padding: 1% 1%;
+    border-radius: 8px;
+  }
+
+  .ActionTable {
+    display: $flex;
+    justify-content: space-around;
+  }
+
+  .AddPropDiv {
+    width: 100%;
+  }
+
+  .Details {
+    text-decoration: none;
+    font-size: .8em;
+    font-weight: 600;
+    color: inherit;
+    border: 1px solid $primaryColor;
+    padding: 2% 2%;
+    border-radius: 8px;
+  }
+
+  .DeletePost {
+    text-decoration: none;
+    font-size: .8em;
+    font-weight: 600;
+    color: red;
+    border: 1px solid red;
+    padding: 2% 2%;
+    border-radius: 8px;
+    background-color: #fff;
+  }
+  
+
+  .TableBody {
+    border: 1px solid red;
   }
 
   .AuthContent {

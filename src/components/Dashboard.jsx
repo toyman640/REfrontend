@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { getProperties } from '../redux/property/propertySlice';
 import { deleteProperty } from '../redux/property/propertyDeatilsSlice';
+import { FaPlusCircle } from 'react-icons/fa';
+import { FaTrashAlt } from "react-icons/fa";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -44,39 +46,41 @@ const Dashboard = () => {
   return (
     <div className="DashboardPage">
       <div className="">
-        <h2>Dashboard Page</h2>
-        <p>
-          Hello,
-          {loggedUser.email}
-        </p>
+        <h2>Properties Posted By You</h2>
       </div>
-      <Link to="/create-new-property">Post new Property</Link>
+      <div className="AddPropDiv">
+        <Link to="/create-new-property" className="PropButton"><span className="AddIcon"><FaPlusCircle /></span><span className="NewProp"> New Property</span></Link>
+      </div>
 
       {newProperties.length === 0 ? (
         <div>
           <h2>No Properties</h2>
-          <Link to="/create-new-property">Post new Property</Link>
+          <div className="AddPropDiv">
+            <Link to="/create-new-property" className="PropButton"><span className="AddIcon"><FaPlusCircle /></span><span className="NewProp"> New Property</span></Link>
+          </div>
         </div>
       ) : (
         <div className="TableDiv">
           <table className="DashboardTable">
             <thead className="TableHead" >
-              <tr style={{ border: '1px solid red' }}>
+              <tr>
                 <th>Title</th>
                 <th>Price</th>
                 <th>Date Posted</th>
                 <th>Actions</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="TableBody">
               {newProperties.map((property) => (
                 <tr key={property.id}>
                   <td>{property.title}</td>
                   <td>{property.price}</td>
                   <td>{formatDateTime(property.created_at)}</td>
                   <td>
-                    <Link to={`/property-details/${property.id}`}>View Details</Link>
-                    <button type="button" onClick={() => handleDelete(property.id)}>Delete</button>
+                    <div className="ActionTable">
+                      <Link to={`/property-details/${property.id}`} className="Details">View Details</Link>
+                      <button type="button" onClick={() => handleDelete(property.id)} className="DeletePost"><FaTrashAlt /> Delete</button>
+                    </div>
                   </td>
                 </tr>
               ))}
