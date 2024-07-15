@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { logOutUser } from '../redux/user/userSlice';
 
 const Navigation = () => {
@@ -10,6 +9,7 @@ const Navigation = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const loggedUserIn = useSelector((state) => state.user.user);
+  const authToken = useSelector((state) => state.user.authToken);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,6 +27,26 @@ const Navigation = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollTop]);
+
+  useEffect(() => {
+    if (loggedUserIn && authToken && location.pathname !== '/login-page') {
+      const checkUserStatus = async () => {
+        try {
+          const response = await dispatch(getCurrentUser());
+          if (response.error || response.payload.status !== 200) {
+            await dispatch(logOutUser());
+            navigate('/login-page');
+          }
+        } catch (error) {
+          console.error('Error fetching current user:', error);
+          await dispatch(logOutUser());
+          navigate('/login-page');
+        }
+      };
+
+      checkUserStatus();
+    }
+  }, [dispatch, loggedUserIn, authToken, navigate, location.pathname]);
 
   const handleLogout = () => {
     dispatch(logOutUser())
