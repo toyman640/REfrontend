@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { getCurrentUser, logOutUser } from '../../redux/user/userSlice';
@@ -21,7 +21,7 @@ const CheckUserStatus = ({ children }) => {
             navigate('/login-page');
           }
         } catch (error) {
-          console.error('Error fetching current user:', error);
+          // console.error('Error fetching current user:', error);
           await dispatch(logOutUser());
           navigate('/login-page');
         }

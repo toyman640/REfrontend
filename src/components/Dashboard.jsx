@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { FaPlusCircle, FaTrashAlt } from 'react-icons/fa';
 import { getProperties } from '../redux/property/propertySlice';
 import { deleteProperty } from '../redux/property/propertyDeatilsSlice';
 
 const Dashboard = () => {
   const dispatch = useDispatch();
-  const loggedUser = useSelector((state) => state.user.user);
+  // const loggedUser = useSelector((state) => state.user.user);
   const newProperties = useSelector((state) => state.properties.properties);
 
   useEffect(() => {

@@ -38,7 +38,6 @@ const Navigation = () => {
             navigate('/login-page');
           }
         } catch (error) {
-          console.error('Error fetching current user:');
           await dispatch(logOutUser());
           navigate('/login-page');
         }
