@@ -10,11 +10,13 @@ import PropertyDetails from './components/ShowProperty';
 import ProtectRoute from './components/ProtectRoute';
 import Properties from './components/Property/Property';
 import Footer from './components/Footer';
+// import CheckUserStatus from './components/Home/CheckUserStatus';
 
 function App() {
   return (
     <>
       <BrowserRouter>
+        {/* <CheckUserStatus /> */}
         <Navigation />
         <Routes>
           <Route path="/" element={<Home />} />

@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate, Link } from 'react-router-dom';
+import { logOutUser, getCurrentUser } from '../redux/user/userSlice';
 
 const Navigation = () => {
   const [isScrollingDown, setIsScrollingDown] = useState(false);
   const [lastScrollTop, setLastScrollTop] = useState(0);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const loggedUserIn = useSelector((state) => state.user.user);
+  const authToken = useSelector((state) => state.user.authToken);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,6 +28,34 @@ const Navigation = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollTop]);
 
+  useEffect(() => {
+    if (loggedUserIn && authToken) {
+      const checkUserStatus = async () => {
+        try {
+          const response = await dispatch(getCurrentUser());
+          if (response.error || response.payload.status !== 200) {
+            await dispatch(logOutUser());
+            navigate('/login-page');
+          }
+        } catch (error) {
+          await dispatch(logOutUser());
+          navigate('/login-page');
+        }
+      };
+
+      checkUserStatus();
+    }
+  }, [dispatch, loggedUserIn, authToken, navigate]);
+
+  const handleLogout = () => {
+    dispatch(logOutUser())
+      .then(() => {
+        navigate('/login-page');
+      })
+      .catch(() => {
+      });
+  };
+
   return (
     <>
       <div className="Navigation">
@@ -36,6 +70,20 @@ const Navigation = () => {
             {' '}
             <span className="LogoSpace">LOGO</span>
           </h2>
+          {loggedUserIn && (
+            <div className="AuthMenu">
+              <ul className="AuthContent">
+                <li>
+                  Hello,
+                  {' '}
+                  {loggedUserIn.email}
+                </li>
+                <li>
+                  <button type="button" className="LogOutButton" onClick={handleLogout}>Logout</button>
+                </li>
+              </ul>
+            </div>
+          )}
           <div className="MenuContents">
             {/* <form action="" className="SearchForm">
               <input className="SearchInput" type="text" placeholder="Search Property" />
