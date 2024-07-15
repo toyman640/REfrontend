@@ -502,7 +502,7 @@ body {
     align-items: center;
     padding-bottom: 5%;
   }
-  
+
   .DashboardTable {
     width: 100%;
   }
@@ -517,7 +517,8 @@ body {
     color: #fff;
   }
 
-  .TableHead th, .TableBody td {
+  .TableHead th,
+  .TableBody td {
     border-bottom: 1px solid #ddd;
     padding: 8px;
     font-family: $mainFont;
@@ -554,7 +555,7 @@ body {
 
   .Details {
     text-decoration: none;
-    font-size: .8em;
+    font-size: 0.8em;
     font-weight: 600;
     color: inherit;
     border: 1px solid $primaryColor;
@@ -564,7 +565,7 @@ body {
 
   .DeletePost {
     text-decoration: none;
-    font-size: .8em;
+    font-size: 0.8em;
     font-weight: 600;
     color: red;
     border: 1px solid red;
@@ -572,7 +573,7 @@ body {
     border-radius: 8px;
     background-color: #fff;
   }
-  
+
 
   .TableBody {
     border: 1px solid red;
@@ -581,7 +582,7 @@ body {
   .AuthContent {
     display: $flex;
     justify-content: space-between;
-    color:$whiteColor;
+    color: $whiteColor;
     width: 100%;
     list-style: none;
   }
@@ -595,6 +596,5 @@ body {
     border-radius: 5px;
     cursor: pointer;
   }
-  
 }
 // Navigation

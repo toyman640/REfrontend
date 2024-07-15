@@ -75,7 +75,9 @@ const Navigation = () => {
             <div className="AuthMenu">
               <ul className="AuthContent">
                 <li>
-                  Hello, {loggedUserIn.email}
+                  Hello,
+                  {' '}
+                  {loggedUserIn.email}
                 </li>
                 <li>
                   <button type="button" className="LogOutButton" onClick={handleLogout}>Logout</button>

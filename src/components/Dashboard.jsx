@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import { FaPlusCircle, FaTrashAlt } from 'react-icons/fa';
 import { getProperties } from '../redux/property/propertySlice';
 import { deleteProperty } from '../redux/property/propertyDeatilsSlice';
-import { FaPlusCircle } from 'react-icons/fa';
-import { FaTrashAlt } from "react-icons/fa";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -49,20 +48,26 @@ const Dashboard = () => {
         <h2>Properties Posted By You</h2>
       </div>
       <div className="AddPropDiv">
-        <Link to="/create-new-property" className="PropButton"><span className="AddIcon"><FaPlusCircle /></span><span className="NewProp"> New Property</span></Link>
+        <Link to="/create-new-property" className="PropButton">
+          <span className="AddIcon"><FaPlusCircle /></span>
+          <span className="NewProp"> New Property</span>
+        </Link>
       </div>
 
       {newProperties.length === 0 ? (
         <div>
           <h2>No Properties</h2>
           <div className="AddPropDiv">
-            <Link to="/create-new-property" className="PropButton"><span className="AddIcon"><FaPlusCircle /></span><span className="NewProp"> New Property</span></Link>
+            <Link to="/create-new-property" className="PropButton">
+              <span className="AddIcon"><FaPlusCircle /></span>
+              <span className="NewProp"> New Property</span>
+            </Link>
           </div>
         </div>
       ) : (
         <div className="TableDiv">
           <table className="DashboardTable">
-            <thead className="TableHead" >
+            <thead className="TableHead">
               <tr>
                 <th>Title</th>
                 <th>Price</th>
@@ -79,7 +84,11 @@ const Dashboard = () => {
                   <td>
                     <div className="ActionTable">
                       <Link to={`/property-details/${property.id}`} className="Details">View Details</Link>
-                      <button type="button" onClick={() => handleDelete(property.id)} className="DeletePost"><FaTrashAlt /> Delete</button>
+                      <button type="button" onClick={() => handleDelete(property.id)} className="DeletePost">
+                        <FaTrashAlt />
+                        {' '}
+                        Delete
+                      </button>
                     </div>
                   </td>
                 </tr>
