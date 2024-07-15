@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate, Link, useLocation } from 'react-router-dom';
-import { logOutUser } from '../redux/user/userSlice';
+import { useNavigate, Link } from 'react-router-dom';
+import { logOutUser, getCurrentUser } from '../redux/user/userSlice';
 
 const Navigation = () => {
   const [isScrollingDown, setIsScrollingDown] = useState(false);
@@ -29,7 +29,7 @@ const Navigation = () => {
   }, [lastScrollTop]);
 
   useEffect(() => {
-    if (loggedUserIn && authToken && location.pathname !== '/login-page') {
+    if (loggedUserIn && authToken) {
       const checkUserStatus = async () => {
         try {
           const response = await dispatch(getCurrentUser());
@@ -38,7 +38,7 @@ const Navigation = () => {
             navigate('/login-page');
           }
         } catch (error) {
-          console.error('Error fetching current user:', error);
+          console.error('Error fetching current user:');
           await dispatch(logOutUser());
           navigate('/login-page');
         }
@@ -46,7 +46,7 @@ const Navigation = () => {
 
       checkUserStatus();
     }
-  }, [dispatch, loggedUserIn, authToken, navigate, location.pathname]);
+  }, [dispatch, loggedUserIn, authToken, navigate]);
 
   const handleLogout = () => {
     dispatch(logOutUser())
